@@ -4,6 +4,7 @@ import "./globals.css";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import NAV from "./compoents/nav";
+import Footer from "./compoents/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NAV params={{ lng: lng }} />
         {children}
+        <Footer params={{ lng: lng }} />
       </body>
     </html>
   );

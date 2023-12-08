@@ -1,4 +1,5 @@
 import { useTranslation } from "@/app/i18n";
+import BackImage from "@/public/Image/page_end.png";
 
 export default async function Home({
   params: { lng },
