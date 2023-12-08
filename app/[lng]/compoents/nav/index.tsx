@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslation } from "@/app/i18n/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Nav({ params: { lng } }: { params: { lng: string } }) {
   const { t } = useTranslation(lng);
@@ -21,53 +21,55 @@ export default function Nav({ params: { lng } }: { params: { lng: string } }) {
             <div className="flex h-[60px] items-center justify-between">
               <div className="flex items-center  flex-grow justify-between">
                 <div className="flex-shrink-0">
-                  <img
-                    className="h-[32px] w-[95px]"
-                    src="https://druid.tech/wp-content/uploads/2020/09/cropped-LOGO_%E7%94%BB%E6%9D%BF-1.png"
-                    alt="Your Company"
-                  />
+                  <a href={`/${lng}/`}>
+                    <img
+                      className="h-[32px] w-[95px]"
+                      src="https://druid.tech/wp-content/uploads/2020/09/cropped-LOGO_%E7%94%BB%E6%9D%BF-1.png"
+                      alt="Your Company"
+                    />
+                  </a>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     <a
-                      href="/products"
+                      href={`/${lng}/products`}
                       className="text-gray-900  hover:text-[#69becb]  px-3 py-2 text-md font-medium"
                       aria-current="page"
                     >
                       Products
                     </a>
                     <a
-                      href="/ecotopia"
+                      href={`/${lng}/ecotopia`}
                       className="text-gray-900  hover:text-[#69becb]  px-3 py-2 text-md font-medium"
                     >
                       Ecotopia
                     </a>
                     <a
-                      href="/applications"
+                      href={`/${lng}/applications`}
                       className="text-gray-900  hover:text-[#69becb] px-3 py-2 text-md font-medium"
                     >
                       Applications
                     </a>
                     <a
-                      href="/intelinkgo"
+                      href={`/${lng}/intelinkgo`}
                       className="text-gray-900  hover:text-[#69becb] px-3 py-2 text-md font-medium"
                     >
                       IntelinkGo
                     </a>
                     <a
-                      href="/resources"
+                      href={`/${lng}/resources`}
                       className="text-gray-900  hover:text-[#69becb]  px-3 py-2 text-md font-medium"
                     >
                       Resources
                     </a>
                     <a
-                      href="/stories"
+                      href={`/${lng}/stories`}
                       className="text-gray-900  hover:text-[#69becb]  px-3 py-2 text-md font-medium"
                     >
                       Stories
-                    </a>{" "}
+                    </a>
                     <a
-                      href="/druid-in"
+                      href={`/${lng}/druid-in`}
                       className="text-gray-900  hover:text-[#69becb]  px-3 py-2 text-md font-medium"
                     >
                       DRUID IN
@@ -129,46 +131,49 @@ export default function Nav({ params: { lng } }: { params: { lng: string } }) {
               </div>
             </div>
           </div>
-          <div className={`${visable ? "block" : "hidden"}`} id="mobile-menu">
+          <div
+            className={`${visable ? "block" : "hidden"} md:hidden`}
+            id="mobile-menu"
+          >
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
               <a
-                href="/products"
+                href={`/${lng}/products`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 Products
               </a>
               <a
-                href="/ecotopia"
+                href={`/${lng}/ecotopia`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 Ecotopia
               </a>
               <a
-                href="/applications"
+                href={`/${lng}/applications`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 Applications
               </a>
               <a
-                href="/intelinkgo"
+                href={`/${lng}/intelinkgo`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 IntelinkGo
               </a>
               <a
-                href="/resources"
+                href={`/${lng}/resources`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 Resources
               </a>
               <a
-                href="/stories"
+                href={`/${lng}/stories`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 Stories
-              </a>{" "}
+              </a>
               <a
-                href="/druid-in"
+                href={`/${lng}/druid-in`}
                 className="text-gray-900  hover:text-[#69becb] block px-3 py-2 text-sm font-medium"
               >
                 DRUID IN
