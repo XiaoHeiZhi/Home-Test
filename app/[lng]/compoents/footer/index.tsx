@@ -191,7 +191,7 @@ export default function Footer({
             {navList.map((item, i) => {
               return (
                 <li key={i} className="w-full">
-                  <a className=" font-[Poppins]" href={`/${lng}/${item.path}`}>
+                  <a className="font-[Poppins]" href={`/${lng}/${item.path}`}>
                     {item.text}
                   </a>
                 </li>
@@ -267,8 +267,7 @@ export default function Footer({
                 fill="white"
               />
             </svg>
-            2F, Yongjiale Building, Xiaweiyuanxincun, Bao'an District,Shenzhen,
-            China
+            {'2F, Yongjiale Building, Xiaweiyuanxincun, Bao\'an District,Shenzhen,China'}
           </div>
           <div className="text-[#d9d9d9] text-sm text-left mb-[20px] flex">
             <svg

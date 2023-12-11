@@ -18,9 +18,3 @@ export default function Home({ params: { lng } }: { params: { lng: string } }) {
   );
 }
 
-
-{
-  /* <animated.div
-        style={{ width: 80, height: 80, background: "blue", ...springs }}
-      /> */
-}
