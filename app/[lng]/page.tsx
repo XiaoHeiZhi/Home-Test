@@ -9,7 +9,7 @@ import carouselFour from "@/public/Image/carousel-four.jpeg";
 
 export default function Home({ params: { lng } }: { params: { lng: string } }) {
   // const { t } = await useTranslation(lng);
-  const imageArray = [carouselOne, carouselTwo, carouselThree, carouselFour];
+  const imageArray = [carouselFour, carouselTwo, carouselOne, carouselThree];
 
   return (
     <>
@@ -17,4 +17,3 @@ export default function Home({ params: { lng } }: { params: { lng: string } }) {
     </>
   );
 }
-
