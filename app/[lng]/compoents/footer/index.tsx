@@ -1,10 +1,19 @@
+"use client";
 import BackImage from "@/public/Image/page_end.png";
+import { useState } from "react";
+import { animated, useSpring } from "@react-spring/web";
 
-export default async function Footer({
+export default function Footer({
   params: { lng },
 }: {
   params: { lng: string };
 }) {
+  const [navHidden, setNavHidden] = useState(false);
+
+  const [seriesHidden, setSeriesHidden] = useState(false);
+
+  const [productHidden, setProductHidden] = useState(false);
+
   const seriesList = [
     {
       text: "DEBUT Series",
@@ -98,6 +107,12 @@ export default async function Footer({
     },
   ];
 
+  // 设置动画
+  const springs = useSpring({
+    from: { opacity: 0, transform: "translateY(-50px)" },
+    to: { opacity: 1, transform: "translateY(0px)" },
+  });
+
   return (
     <footer
       style={{
@@ -105,9 +120,9 @@ export default async function Footer({
       }}
       className=" bg-no-repeat bg-cover"
     >
-      <div className="container px-5 py-10 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+      <div className="container px-5 py-10 mx-auto md:flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col  hidden">
         <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-          <div className="lg:w-1/3 md:w-1/2 w-full px-4 text-left ml-28 md:ml-0 md:pl-20">
+          <div className="lg:w-1/3  w-full px-4 text-left ml-28 md:ml-0 md:pl-20">
             <nav className="list-none">
               {navList.map((item, i) => {
                 return (
@@ -123,7 +138,7 @@ export default async function Footer({
               })}
             </nav>
           </div>
-          <div className="lg:w-1/3 md:w-1/2 w-full px-4 text-left ml-28 md:ml-0 md:pl-20">
+          <div className="lg:w-1/3  w-full px-4 text-left ml-28 md:ml-0 md:pl-20">
             <nav className="list-none">
               {seriesList.map((item, i) => {
                 return (
@@ -138,11 +153,11 @@ export default async function Footer({
               })}
             </nav>
           </div>
-          <div className="lg:w-1/3 md:w-1/2 w-full px-4 text-left ml-28 md:ml-0 md:pl-20">
+          <div className="lg:w-1/3  w-full px-4 text-left ml-28 md:ml-0 md:pl-20">
             <nav className="list-none">
-              {productsList.map((item) => {
+              {productsList.map((item, i) => {
                 return (
-                  <li className="mb-[22px]">
+                  <li className="mb-[22px]" key={i}>
                     <a
                       className="text-[#d9d9d9] hover:text-[#ffffff] font-[Poppins]"
                       href={`/${lng}/products/${item.path}`}
@@ -158,6 +173,77 @@ export default async function Footer({
               })}
             </nav>
           </div>
+        </div>
+      </div>
+      <div className="md:hidden text-[#dbdada]">
+        <div className="border-b-2 mx-2 py-2 border-b-[#dbdada] cursor-pointer">
+          <div
+            className="w-full flex justify-between"
+            onClick={() => setNavHidden(!navHidden)}
+          >
+            <span className=" font-[Poppins]">NAV</span>
+            <button>{navHidden ? "+" : "-"}</button>
+          </div>
+          <animated.ul
+            className={`${navHidden ? "hidden" : ""} pl-6`}
+            style={{ ...springs }}
+          >
+            {navList.map((item, i) => {
+              return (
+                <li key={i} className="w-full">
+                  <a className=" font-[Poppins]" href={`/${lng}/${item.path}`}>
+                    {item.text}
+                  </a>
+                </li>
+              );
+            })}
+          </animated.ul>
+        </div>
+        <div className="border-b-2 mx-2 py-2 border-b-[#dbdada] cursor-pointer">
+          <div
+            className="w-full flex justify-between"
+            onClick={() => setSeriesHidden(!seriesHidden)}
+          >
+            <span className=" font-[Poppins]">DEBUT Series</span>
+            <button>{seriesHidden ? "+" : "-"}</button>
+          </div>
+          <animated.ul
+            className={`${seriesHidden ? "hidden" : ""} pl-6`}
+            style={{ ...springs }}
+          >
+            {seriesList.map((item, i) => {
+              return (
+                <li key={i} className="w-full">
+                  <a className=" font-[Poppins]" href={`/${lng}/${item.path}`}>
+                    {item.text}
+                  </a>
+                </li>
+              );
+            })}
+          </animated.ul>
+        </div>{" "}
+        <div className="border-b-2 mx-2 py-2 border-b-[#dbdada] cursor-pointer">
+          <div
+            className="w-full flex justify-between"
+            onClick={() => setProductHidden(!productHidden)}
+          >
+            <span className=" font-[Poppins]">Others</span>
+            <button>{productHidden ? "+" : "-"}</button>
+          </div>
+          <animated.ul
+            className={`${productHidden ? "hidden" : ""} pl-6`}
+            style={{ ...springs }}
+          >
+            {productsList.map((item, i) => {
+              return (
+                <li key={i} className="w-full">
+                  <a className=" font-[Poppins]" href={`/${lng}/${item.path}`}>
+                    {item.text}
+                  </a>
+                </li>
+              );
+            })}
+          </animated.ul>
         </div>
       </div>
       <div className="container  mx-auto px-10">
@@ -184,7 +270,6 @@ export default async function Footer({
             2F, Yongjiale Building, Xiaweiyuanxincun, Bao'an District,Shenzhen,
             China
           </div>
-
           <div className="text-[#d9d9d9] text-sm text-left mb-[20px] flex">
             <svg
               width="22"
@@ -205,22 +290,23 @@ export default async function Footer({
             District,Chengdu, China
           </div>
           <div className="text-[#8c8c8c] text-sm text-left mb-[20px] flex">
-            © 2022 Druid Technology Co., Ltd. All Rights Reserved.  Privacy Policy  |  Terms of Used
+            © 2022 Druid Technology Co., Ltd. All Rights Reserved.  Privacy
+            Policy  |  Terms of Used
           </div>
         </div>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 w-full justify-end">
-            <a className="text-gray-500">
-              <svg
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-              </svg>
-            </a>
+          <a className="text-gray-500">
+            <svg
+              fill="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg>
+          </a>
         </span>
       </div>
     </footer>
