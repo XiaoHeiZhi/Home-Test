@@ -8,11 +8,11 @@ export default function Footer({
 }: {
   params: { lng: string };
 }) {
-  const [navHidden, setNavHidden] = useState(false);
+  const [navHidden, setNavHidden] = useState(true);
 
-  const [seriesHidden, setSeriesHidden] = useState(false);
+  const [seriesHidden, setSeriesHidden] = useState(true);
 
-  const [productHidden, setProductHidden] = useState(false);
+  const [productHidden, setProductHidden] = useState(true);
 
   const seriesList = [
     {
@@ -108,11 +108,20 @@ export default function Footer({
   ];
 
   // 设置动画
-  const springs = useSpring({
-    from: { opacity: 0, transform: "translateY(-10px)" },
-    to: { opacity: 1, transform: "translateY(0px)" },
-    reset: true,
-  });
+  const [springs, setSprings] = useSpring(() => ({
+    opacity: 0,
+    transform: "translateY(-10px)",
+  }));
+
+  const [springsSeries, setSpringsSeries] = useSpring(() => ({
+    opacity: 0,
+    transform: "translateY(-10px)",
+  }));
+
+  const [springsOther, setSpringsOther] = useSpring(() => ({
+    opacity: 0,
+    transform: "translateY(-10px)",
+  }));
 
   return (
     <footer
@@ -177,26 +186,32 @@ export default function Footer({
         </div>
       </div>
       <div className="md:hidden text-[#dbdada]">
-        <div className="border-b-2 mx-2 py-2 border-b-[#dbdada] cursor-pointer">
+        <div className="border-b-2 mx-4 py-2 border-b-[#dbdada] cursor-pointer">
           <div
             className="w-full flex justify-between"
-            onClick={() => setNavHidden(!navHidden)}
+            onClick={() => {
+              setNavHidden(!navHidden);
+              setSprings.start(
+                navHidden
+                  ? { opacity: 1, transform: "translateY(0px)" }
+                  : {
+                      opacity: 0,
+                      transform: "translateY(-10px)",
+                    }
+              );
+            }}
           >
             <span className=" font-[Poppins]">NAV</span>
             <button>{navHidden ? "+" : "-"}</button>
           </div>
           <animated.ul
             className={`${navHidden ? "hidden" : ""} pl-6`}
-            style={{ ...springs }}
+            style={springs}
           >
             {navList.map((item, i) => {
               return (
                 <li key={i} className="w-full">
-                  <a
-                    className="font-[Poppins]"
-                    href={`/${lng}/${item.path}`}
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <a className="font-[Poppins]" href={`/${lng}/${item.path}`}>
                     {item.text}
                   </a>
                 </li>
@@ -204,17 +219,27 @@ export default function Footer({
             })}
           </animated.ul>
         </div>
-        <div className="border-b-2 mx-2 py-2 border-b-[#dbdada] cursor-pointer">
+        <div className="border-b-2 mx-4 py-2 border-b-[#dbdada] cursor-pointer">
           <div
             className="w-full flex justify-between"
-            onClick={() => setSeriesHidden(!seriesHidden)}
+            onClick={() => {
+              setSpringsSeries.start(
+                seriesHidden
+                  ? { opacity: 1, transform: "translateY(0px)" }
+                  : {
+                      opacity: 0,
+                      transform: "translateY(-10px)",
+                    }
+              );
+              setSeriesHidden(!seriesHidden);
+            }}
           >
             <span className=" font-[Poppins]">DEBUT Series</span>
             <button>{seriesHidden ? "+" : "-"}</button>
           </div>
           <animated.ul
             className={`${seriesHidden ? "hidden" : ""} pl-6`}
-            style={{ ...springs }}
+            style={springsSeries}
           >
             {seriesList.map((item, i) => {
               return (
@@ -226,18 +251,28 @@ export default function Footer({
               );
             })}
           </animated.ul>
-        </div>{" "}
-        <div className="border-b-2 mx-2 py-2 border-b-[#dbdada] cursor-pointer">
+        </div>
+        <div className="border-b-2 mx-4 py-2 border-b-[#dbdada] cursor-pointer">
           <div
             className="w-full flex justify-between"
-            onClick={() => setProductHidden(!productHidden)}
+            onClick={() => {
+              setProductHidden(!productHidden);
+              setSpringsOther.start(
+                productHidden
+                  ? { opacity: 1, transform: "translateY(0px)" }
+                  : {
+                      opacity: 0,
+                      transform: "translateY(-10px)",
+                    }
+              );
+            }}
           >
             <span className=" font-[Poppins]">Others</span>
             <button>{productHidden ? "+" : "-"}</button>
           </div>
           <animated.ul
             className={`${productHidden ? "hidden" : ""} pl-6`}
-            style={{ ...springs }}
+            style={springsOther}
           >
             {productsList.map((item, i) => {
               return (
