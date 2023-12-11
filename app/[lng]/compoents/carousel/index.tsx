@@ -6,13 +6,18 @@ import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, EffectFade, Autoplay } from "swiper/modules";
 import Image, { StaticImageData } from "next/image";
-import { animated, useSpring } from "@react-spring/web";
+import { a, animated, useSpring } from "@react-spring/web";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function MySwiper({
   ImageArr,
+  textArray,
+  lng,
 }: {
   ImageArr: StaticImageData[];
+  textArray: Array<{ title: string; context: string }>;
+  lng: string;
 }) {
   const [springs, setSprings] = useSpring(() => ({
     opacity: 0,
@@ -20,6 +25,42 @@ export default function MySwiper({
   }));
 
   const [textVisbly, setTextVisbly] = useState(true);
+
+  const switchA = (i: number) => {
+    switch (i) {
+      case 0:
+        return (
+          <Link
+            href={`/${lng}/stories/a-million-data-in-the-air/`}
+            className=" text-blue-300 pl-2"
+          >
+            Read more...
+          </Link>
+        );
+      case 1:
+        return (
+          <Link href={`/${lng}/`} className=" text-blue-300 pl-2">
+            Learn more...
+          </Link>
+        );
+      case 2:
+        return (
+          <Link
+            href={`https://www.ecotopiago.com/#/login`}
+            className=" text-blue-300 pl-2"
+            target="_black"
+          >
+            Login in
+          </Link>
+        );
+      case 3:
+        return (
+          <Link href={`/resources/`} className=" text-yellow-300 pl-2">
+            DownLoad
+          </Link>
+        );
+    }
+  };
 
   useEffect(() => {
     setSprings.start({
@@ -69,15 +110,12 @@ export default function MySwiper({
                 } absolute bottom-1/2 left-[13%] w-box text-white `}
               >
                 <div className=" font-bold font-Poppins text-[24px]">
-                  One Million Data in the Air
+                  {textArray[i].title}
                 </div>
-                <div>{`
-                    In 2019, a dedicated team of researchers initiated an extraordinary journey of
-                    discovery by outfitting mana, a Heuglin's Gull in Salalah, with DEBUT LEGO
-                    device. What followed in the subsequent years was an awe- inspiring saga, as
-                    Omana's flight records unveiled a remarkable tale of three migrations.
-                    Read more
-                `}</div>
+                <div>
+                  {textArray[i].context}
+                  {switchA(i)}
+                </div>
               </animated.div>
             </SwiperSlide>
           );
